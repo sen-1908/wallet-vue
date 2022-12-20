@@ -8,12 +8,19 @@ const routes = [
     component: indexView
   },
   {
+    path: '/post',
+    name: 'post',
+    component: () => import('../views/PostView.vue')
+  },
+  {
+    path: '/show',
+    name: 'show',
+    component: () => import('../views/ShowView.vue')
+  },
+  {
     path: '/edit',
     name: 'edit',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/EditView.vue')
+    component: () => import('../views/EditView.vue')
   }
 ]
 
