@@ -13,8 +13,9 @@ const routes = [
     component: () => import('../views/PostView.vue')
   },
   {
-    path: '/show',
+    path: '/show/:id',
     name: 'show',
+    props: true,
     component: () => import('../views/ShowView.vue')
   },
   {

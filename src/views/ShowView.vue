@@ -1,9 +1,14 @@
 <script setup>
-const fruts = {
-  1: 'ringo'
-}
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import IndexViewVue from './IndexView.vue'
+
+console.log(IndexViewVue)
+const route = useRoute()
+const userId = ref(route.params.id)
 </script>
 
 <template>
-{{ fruts[1] }}
+  <p>{{ route.params.id }}</p>
+  <p>{{ userId }}</p>
 </template>
