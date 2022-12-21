@@ -3,7 +3,7 @@
     <router-link to="/">Home</router-link>
     <router-link to="/post">Post</router-link>
   </nav>
-  <router-view></router-view>
+  <router-view/>
 </template>
 
 <style>
@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 30px;
 }
 
 .nav {
@@ -22,6 +23,8 @@
 nav a {
   font-weight: bold;
   color: #2c3e50;
+  margin: 20px;
+  font-size: 25px;;
 }
 
 nav a.router-link-exact-active {
