@@ -6,7 +6,7 @@ console.log(items)
 
 <template>
   <div>
-    <div class="flex justify-center ">
+    <div class="flex justify-center flex-wrap">
       <div v-for="item in items.values" :key="item.id" class="max-w-sm rounded overflow-hidden shadow-lg m-2 ">
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">
