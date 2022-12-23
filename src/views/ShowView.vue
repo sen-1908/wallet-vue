@@ -20,7 +20,7 @@ const userId = route.params.id - 1
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">
-          <router-link to="/" class="text-red-500">Destroy</router-link>
+          <router-link :to="{ name: 'edit', params: { id: route.params.id } }" class="text-blue-500">edit</router-link>
         </div>
       </div>
     </div>

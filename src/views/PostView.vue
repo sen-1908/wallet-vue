@@ -4,12 +4,10 @@ import { ref } from 'vue'
 
 const itemName = ref('')
 const itemCategory = ref('')
-const itemId = ref(1)
 
 const addItem = () => {
   const path = 'http://localhost:8888/items'
   const item = {
-    itemId: itemId.value,
     itemName: itemName.value,
     itemCategory: itemCategory.value
   }
@@ -22,7 +20,6 @@ const addItem = () => {
       console.log(item)
       console.log(error)
     })
-  itemId.value = itemId.value + 1
 }
 </script>
 

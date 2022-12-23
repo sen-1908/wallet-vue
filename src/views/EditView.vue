@@ -1,9 +1,58 @@
 <script setup>
-const fruts = {
-  1: 'ringo'
+import getItem from '@/components/GetItem.vue'
+import axios from 'axios'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const items = getItem()
+const route = useRoute()
+const userId = route.params.id - 1
+const itemName = ref('')
+const itemCategory = ref('')
+
+console.log(items)
+
+const addItem = () => {
+  const path = 'http://localhost:8888/items'
+  const item = {
+    itemId: userId,
+    itemName: itemName.value,
+    itemCategory: itemCategory.value
+  }
+  console.log(item)
+  axios.post(path, item)
+    .then(responce => {
+      console.log(item)
+    })
+    .catch(error => {
+      console.log(item)
+      console.log(error)
+    })
 }
 </script>
 
 <template>
-{{ fruts[1] }}
+<div class="w-full max-w-xs m-auto ">
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        Item Name
+      </label>
+      <input v-model="items" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Apple">
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+        Item Category
+      </label>
+      <input v-model="itemCategory" class="shadow border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder="Fruts">
+    </div>
+    <div>
+      <router-link to="/" class="text-red-500">
+        <button @click="addItem" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto" type="button">
+          Create
+        </button>
+    </router-link>
+    </div>
+  </form>
+</div>
 </template>
