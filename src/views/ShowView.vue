@@ -3,26 +3,30 @@ import { useRoute } from 'vue-router'
 import getItem from '../components/GetItem.vue'
 
 const items = getItem()
+console.log(items.values)
 const route = useRoute()
-const userId = route.params.id - 1
+const itemName = route.params.name
+
 </script>
 
 <template>
-  <div v-if="items.values">
-    <div class="flex justify-center ">
-      <div class="max-w-sm rounded overflow-hidden shadow-lg m-2 ">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">
-           <p>{{ items.values[userId].itemName }}</p>
-          </div>
-          <p class="text-gray-700 text-base">
-            {{ items.values[userId].itemCategory }}
-          </p>
-        </div>
-        <div class="px-6 pt-4 pb-2">
-          <router-link :to="{ name: 'edit', params: { id: route.params.id } }" class="text-blue-500">edit</router-link>
-        </div>
-      </div>
+  <div>
+    <div>
+      <table class="my-10 m-auto border w-9/12">
+        <tr class="border bg-green-300">
+          <th class="text-left">項目</th>
+          <th class="text-left">金額</th>
+          <th class="text-left">補足</th>
+        </tr>
+        <tr v-for="item in items.values" :key="item.id" class=" m-2 ">
+          <template v-if="item.name == itemName" >
+            <td class="text-left">{{ item.name}}</td>
+            <td class="text-left">{{ item.money }}</td>
+            <td class="text-left">{{ item.appendix }}</td>
+          </template>
+        </tr>
+      </table>
     </div>
   </div>
+
 </template>

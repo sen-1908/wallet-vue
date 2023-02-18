@@ -1,25 +1,37 @@
 <script setup>
 import getItem from '../components/GetItem.vue'
+
 const items = getItem()
 console.log(items)
+let totalAmount = 0
+const addAmount = (e) => {
+  totalAmount += e
+}
 </script>
 
 <template>
   <div>
-    <div class="flex justify-center flex-wrap">
-      <div v-for="item in items.values" :key="item.id" class="max-w-sm rounded overflow-hidden shadow-lg m-2 ">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">
-            <router-link :to="{ name: 'show', params: { id: item.itemId } }">{{ item.itemName }}</router-link>
-          </div>
-          <p class="text-gray-700 text-base">
-            {{ item.itemCategory }}
-          </p>
-        </div>
-        <div class="px-6 pt-4 pb-2">
-          <router-link to="/" class="text-red-500">Destroy</router-link>
-        </div>
-      </div>
+    <div>
+      <table class="my-10 m-auto border w-9/12">
+        <tr class="border bg-green-300">
+          <th class="text-left">項目</th>
+          <th class="text-left">金額</th>
+          <th class="text-left">補足</th>
+        </tr>
+        <tr v-for="item in items.values" :key="item.id" class=" m-2 ">
+            <td class="text-left cursor-auto">
+              <router-link :to="{ name: 'show', params: { name: item.name } }">{{ item.name }}</router-link>
+            </td>
+            <td class="text-left">{{ item.money }}</td>
+            <td class="text-left">{{ item.appendix }}</td>
+          {{ addAmount(item.money)}}
+        </tr>
+        <tr class="border">
+          <td class="text-left">合計金額</td>
+          <td class="text-left">{{ totalAmount }}</td>
+          <td></td>
+        </tr>
+      </table>
     </div>
   </div>
 

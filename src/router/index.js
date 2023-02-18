@@ -13,13 +13,13 @@ const routes = [
     component: () => import('../views/PostView.vue')
   },
   {
-    path: '/show/:id',
+    path: '/show/:name',
     name: 'show',
     props: true,
     component: () => import('../views/ShowView.vue')
   },
   {
-    path: '/edit/:id',
+    path: '/edit',
     name: 'edit',
     component: () => import('../views/EditView.vue')
   }
