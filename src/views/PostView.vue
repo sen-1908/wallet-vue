@@ -2,49 +2,75 @@
 import axios from 'axios'
 import { ref } from 'vue'
 
-const itemName = ref('')
-const itemCategory = ref('')
+const name = ref('')
+const money = ref('')
+const appendix = ref('')
+const isShow = ref(false)
+const isFail = ref(false)
 
 const addItem = () => {
-  const path = 'http://localhost:8888/items'
+  const path = 'http://localhost:8888/'
   const item = {
-    itemName: itemName.value,
-    itemCategory: itemCategory.value
+    name: name.value,
+    money: money.value,
+    appendix: appendix.value
   }
   console.log(item)
-  axios.post(path, item)
-    .then(responce => {
-      console.log(item)
-    })
-    .catch(error => {
-      console.log(item)
-      console.log(error)
-    })
+  if (name.value !== '' && money.value !== '' && money.value > 500) {
+    axios.post(path, item)
+      .then(responce => {
+        console.log(item)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    isShow.value = true
+    console.log(isShow.value)
+  } else {
+    console.log('失敗')
+    isFail.value = true
+    isShow.value = false
+  }
 }
 </script>
 
 <template>
-<div class="w-full max-w-xs m-auto ">
-  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Item Name
-      </label>
-      <input v-model="itemName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Apple">
+  <div>
+    <div v-show=isShow class="bg-green-300 my-10 mx-auto w-1/2 border text-center">
+        <p>投稿に成功しました</p>
     </div>
-    <div class="mb-6">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-        Item Category
-      </label>
-      <input v-model="itemCategory" class="shadow border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder="Fruts">
+    <div v-show=isFail class="bg-green-300 my-10 mx-auto w-1/2 border text-center">
+        <p>投稿に失敗しました</p>
+        <br>
+        <p>項目、金額、補足を入力してください。</p>
+        <p>金額は3桁以上で入力してください</p>
     </div>
     <div>
-      <router-link to="/" class="text-red-500">
-        <button @click="addItem" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto" type="button">
-          Create
-        </button>
-    </router-link>
+      <table class="my-10 m-auto border w-9/12">
+        <tr class="border bg-green-300">
+          <th class="text-left">項目</th>
+          <th class="text-left">金額</th>
+          <th class="text-left">補足</th>
+        </tr>
+        <tr class=" m-2 ">
+          <td class="text-left">
+            <input v-model="name" placeholder="項目を入力してください">
+          </td>
+          <td class="text-left">
+            <input v-model="money" placeholder="金額を入力してください">
+          </td>
+          <td class="text-left">
+            <input v-model="appendix" placeholder="補足事項があれば記入">
+          </td>
+        </tr>
+      </table>
+      <router-link to= '/post'  class="text-red-500">
+          <button @click="addItem"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
+            type="button">
+            新規作成
+          </button>
+      </router-link>
     </div>
-  </form>
-</div>
+  </div>
 </template>

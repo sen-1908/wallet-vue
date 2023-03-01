@@ -17,11 +17,6 @@ const routes = [
     name: 'show',
     props: true,
     component: () => import('../views/ShowView.vue')
-  },
-  {
-    path: '/edit',
-    name: 'edit',
-    component: () => import('../views/EditView.vue')
   }
 ]
 

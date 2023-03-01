@@ -7,6 +7,11 @@ console.log(items.values)
 const route = useRoute()
 const itemName = route.params.name
 
+let totalAmount = 0
+const addAmount = (e) => {
+  totalAmount += e
+}
+
 </script>
 
 <template>
@@ -21,9 +26,15 @@ const itemName = route.params.name
         <tr v-for="item in items.values" :key="item.id" class=" m-2 ">
           <template v-if="item.name == itemName" >
             <td class="text-left">{{ item.name}}</td>
-            <td class="text-left">{{ item.money }}</td>
+            <td class="text-left">{{ item.money.toLocaleString() }}</td>
             <td class="text-left">{{ item.appendix }}</td>
+            {{ addAmount(item.money) }}
           </template>
+        </tr>
+        <tr class="border">
+          <td class="text-left">合計金額</td>
+          <td class="text-left">{{ totalAmount.toLocaleString() }}</td>
+          <td></td>
         </tr>
       </table>
     </div>
